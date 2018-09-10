@@ -1,6 +1,9 @@
 # ML stuff
 models
 
+# course files
+theory
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -41,6 +44,7 @@ target/
 
 # pyenv
 .python-version
+.swp
 
 # SageMath parsed files
 *.sage.py
