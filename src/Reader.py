@@ -40,7 +40,8 @@ class Reader():
   """
   def __threshold(self, gray_image):
     thresholdValue = threshold_otsu(gray_image)
-    return gray_image > thresholdValue
+    binary = gray_image > thresholdValue
+    return binary.astype('uint8') * 255
 
   
   

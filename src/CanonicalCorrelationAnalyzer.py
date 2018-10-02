@@ -30,7 +30,7 @@ class CanonicalCorrelationAnalyzer():
       
       # TODO: Add more accurate method of ignoring small regions
       if each_region.area < 100:
-          continue
+        continue
 
       min_row, min_col, max_row, max_col = each_region.bbox
       
@@ -43,7 +43,7 @@ class CanonicalCorrelationAnalyzer():
         # TODO: Move plotting to separate class
         if 'DISP' in os.environ: 
           fig, (ax1, ax2) = plt.subplots(1, 2)
-          rectBorder = patches.Rectangle((min_col, min_row), max_col-min_col, max_row-min_row, edgecolor="red", linewidth=2, fill=False)
+          rectBorder = patches.Rectangle((min_col, min_row), region_width, region_height, edgecolor="red", linewidth=2, fill=False)
           ax1.add_patch(rectBorder)
 
           ax1.imshow(self.__binary_image, cmap="gray")

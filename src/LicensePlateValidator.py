@@ -1,6 +1,13 @@
 class LicensePlateValidator():
   
   # Info based on wikipedia article (https://pl.wikipedia.org/wiki/Tablice_rejestracyjne_w_Polsce)
+  # 
+  # A plate is considered present if and only if:
+  #  * Width to height ratio is between real license plate ratio +/- allowed mistake
+  #  * TODO: The plate falls entirely within the image bounds.
+  #  * TODO: The plate’s width is less than 80% of the image’s width, and the plate’s height is less than 87.5% of the image’s height.
+  #  * TODO: The plate’s width is greater than 60% of the image’s width or the plate’s height is greater than 60% of the image’s height.
+
   def __init__(self, real_l_p_width = 520, real_l_p_height = 114, allowed_mistake = 0.1):
     self._real_l_p_width = real_l_p_width
     self._real_l_p_height = real_l_p_height
