@@ -6,21 +6,11 @@ from Reader import Reader
 from LicensePlateValidator import LicensePlateValidator 
 from CanonicalCorrelationAnalyzer import CanonicalCorrelationAnalyzer
 
-reader = Reader('../input_images/car3.jpg')
+reader = Reader('../input_images/car2.jpg')
+binary_image = reader.get_binary_resized(1)
 
-licensePlateValidator = LicensePlateValidator()
-cca = CanonicalCorrelationAnalyzer(reader, licensePlateValidator)
+cca = CanonicalCorrelationAnalyzer(binary_image, LicensePlateValidator(allowed_mistake=0.1))
 
-cca.get_plate_like_objects()
+cca.find_plate_like_objects()
 
 print(cca.plate_like_objects)
-
-# In order to see the output of script run it with DISP_GRAY=1 environment variable
-if 'DISP_GRAY' in os.environ: 
-  fig, (ax1, ax2) = plt.subplots(1,2)
-
-  ax1.imshow(closing(reader.full_car_image, square(3)), cmap="gray")
-  # ax1.imshow(image_grayscaled, cmap="gray")
-  ax2.imshow(reader.binary_image, cmap="gray")
-  
-  plt.show()

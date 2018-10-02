@@ -1,7 +1,7 @@
 class LicensePlateValidator():
   
   # Info based on wikipedia article (https://pl.wikipedia.org/wiki/Tablice_rejestracyjne_w_Polsce)
-  def __init__(self, real_l_p_width = 520, real_l_p_height = 114, allowed_mistake = 0.17):
+  def __init__(self, real_l_p_width = 520, real_l_p_height = 114, allowed_mistake = 0.1):
     self._real_l_p_width = real_l_p_width
     self._real_l_p_height = real_l_p_height
     self._real_l_p_width_to_height_ratio = float(self._real_l_p_width / self._real_l_p_height)
@@ -31,13 +31,3 @@ class LicensePlateValidator():
 
     print(f'DEBUG: Ratio: {region_width_to_height_ratio} should be between {min_allowed_ratio} and {max_allowed_ratio}')
     return region_width_to_height_ratio >= min_allowed_ratio and region_width_to_height_ratio <= max_allowed_ratio
-
-
-
-# LPV = LicensePlateValidator()
-
-# result = LPV.validate_width_and_height(4.7,1)
-# print(result)
-# LPV.set_allowed_mistake(0.1)
-# result2 = LPV.validate_width_and_height(4.8,1)
-# print(result2)

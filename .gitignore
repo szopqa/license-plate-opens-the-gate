@@ -6,6 +6,7 @@ models
 
 # course files
 theory
+experiments
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
