@@ -19,7 +19,7 @@ def read_training_data(training_directory):
         for each in range(10):
             image_path = os.path.join(training_directory, each_letter, each_letter + '_' + str(each) + '.jpg')
             # read each image of each character
-            img_details = imread(image_path, as_grey=True)
+            img_details = imread(image_path, as_gray=True)
             # converts each character image to binary image
             binary_image = img_details < threshold_otsu(img_details)
             # the 2D array of each image is flattened because the machine learning

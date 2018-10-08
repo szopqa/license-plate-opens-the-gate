@@ -3,7 +3,6 @@ from skimage.io import imread
 from skimage.filters import threshold_otsu
 from skimage.transform import resize
 from PIL import Image
-import numpy as np
 
 class Reader():
   """
@@ -12,7 +11,7 @@ class Reader():
   be calculated dynamically to keep same image ratio
   """
   def __init__(self, image_location, img_max_width=600):
-    read_image = imread(image_location, as_grey=True)
+    read_image = imread(image_location, as_gray=True)
 
     self._img_max_width = img_max_width
     self.__car_image_grayscaled = self.__read_and_resize_if_necessary(read_image)
@@ -43,8 +42,6 @@ class Reader():
     binary = gray_image > thresholdValue
     return binary.astype('uint8') * 255
 
-  
-  
   """
   Returns binary image resized by given ratio
   """
@@ -58,7 +55,7 @@ class Reader():
   Returns binary image
   """
   def get_binary(self):
-    return self.__threshold(self.__car_image_grayscaled )
+    return self.__threshold(self.__car_image_grayscaled)
 
   """
   Returns greyscaled image

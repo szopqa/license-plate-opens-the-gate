@@ -4,6 +4,10 @@
 # ML stuff
 models
 
+#output images
+
+output_images
+
 # course files
 theory
 experiments

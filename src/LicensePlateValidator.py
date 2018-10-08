@@ -14,6 +14,10 @@ class LicensePlateValidator():
     self._real_l_p_width_to_height_ratio = float(self._real_l_p_width / self._real_l_p_height)
 
     self.set_allowed_mistake(allowed_mistake)
+    
+    self.__min_allowed_ratio = float(self._real_l_p_width_to_height_ratio - self._allowed_deviation)
+    self.__max_allowed_ratio = float(self._real_l_p_width_to_height_ratio + self._allowed_deviation)
+
 
   """
   sets mistake allowed in width to height ratio calculation
@@ -30,11 +34,14 @@ class LicensePlateValidator():
   Checks if plate like objects width to height ratio is between
   real license plate ratio +/- allowed mistake
   """
-  def validate_width_and_height(self, region_width, region_height):
-    min_allowed_ratio = float(self._real_l_p_width_to_height_ratio - self._allowed_deviation)
-    max_allowed_ratio = float(self._real_l_p_width_to_height_ratio + self._allowed_deviation)
-    
+  def validate_width_and_height(self, region_width, region_height):    
     region_width_to_height_ratio = float(region_width / region_height)
 
-    print(f'DEBUG: Ratio: {region_width_to_height_ratio} should be between {min_allowed_ratio} and {max_allowed_ratio}')
-    return region_width_to_height_ratio >= min_allowed_ratio and region_width_to_height_ratio <= max_allowed_ratio
+    print(f'DEBUG: Ratio: {region_width_to_height_ratio} should be between {self.__min_allowed_ratio} and {self.__max_allowed_ratio}')
+
+    width_to_height_ratio_condition = region_width_to_height_ratio >= self.__min_allowed_ratio and region_width_to_height_ratio <= self.__max_allowed_ratio
+    width_and_height_values_condition = region_width >= region_height
+
+    all_conditions_fulfilled = width_to_height_ratio_condition and width_and_height_values_condition
+
+    return all_conditions_fulfilled
