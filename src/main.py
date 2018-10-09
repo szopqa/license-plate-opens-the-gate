@@ -20,5 +20,6 @@ print(cca.plate_like_objects)
 
 for plate_like_object in cca.plate_like_objects:
   print(plate_like_object.shape)
-  # ImageDisplay.show_image(plate_like_object)
+  ImageDisplay.show_image(plate_like_object)
+  ImageDisplay.show_filtered_image(plate_like_object)
   saver.save(plate_like_object)
