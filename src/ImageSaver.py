@@ -20,5 +20,4 @@ class ImageSaver():
     image_name = f'{self.__savedImagesDir}/{self.__now}_{ImageSaver.imagesSaved}.png';
 
     img = Image.fromarray(image_matrix, mode = 'L')
-    print(image_name)
     img.save(image_name);

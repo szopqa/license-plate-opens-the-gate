@@ -46,7 +46,7 @@ class Reader():
   Returns binary image resized by given ratio
   """
   def get_binary_resized(self, resize_ratio):
-    gray_car_image = Image.fromarray(self.__car_image_grayscaled )
+    gray_car_image = Image.fromarray(self.__car_image_grayscaled)
     nx, ny = gray_car_image.size
     gray_car_image_resized = gray_car_image.resize((int(nx*resize_ratio), int(ny*resize_ratio)), Image.BICUBIC)
     return self.__threshold(np.asarray(gray_car_image_resized))

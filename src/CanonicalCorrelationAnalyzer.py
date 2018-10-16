@@ -12,45 +12,64 @@ class CanonicalCorrelationAnalyzer():
   binary_image: Image; Binary image read
   licensePlateValidator: LicensePlateValidator; LicensePlateValidator object
   """
-  def __init__(self, binary_image, licensePlateValidator, min_region_area_as_percentage = 0.5, max_region_area_as_percentage = 20):
+  def __init__(self, binary_image, licensePlateValidator, min_region_area_as_percentage = 0.1, max_region_area_as_percentage = 5):
     self.__licensePlateValidator = licensePlateValidator
     self.__binary_image = binary_image
-    self.__labeled_image_height, self.__labeled_image_width = Image.fromarray(binary_image).size;
-    self.__labeled_image_size = self.__labeled_image_height * self.__labeled_image_width
-    self.__image_size = self.__labeled_image_height * self.__labeled_image_width
+    self.__labeled_image = measure.label(self.__binary_image, return_num = False, connectivity = 2)
+
+    self.__binary_image_height, self.__binary_image_width = Image.fromarray(binary_image).size;
+    self.__binary_image_area = self.__binary_image_height * self.__binary_image_width
+    print(f'DEBUG: Image height: {self.__binary_image_height}, width: {self.__binary_image_width}, size: {self.__binary_image_area}')
+
     self.__min_region_area = self.__calculate_min_area(min_region_area_as_percentage)
     self.__max_region_area = self.__calculate_max_area(max_region_area_as_percentage)
-
-    self.__labeled_image, num_of_labels = measure.label(self.__binary_image, return_num = True, connectivity = 2)
     
-    self.__plate_like_objects = []
-
-    print(f'DEBUG: Image height: {self.__labeled_image_height}, width: {self.__labeled_image_width}, size: {self.__labeled_image_size}')
-    print(f'DEBUG: Found {num_of_labels} labels in current image')
+    self.__plate_like_objects_coordinates = []
 
 
   @property
-  def plate_like_objects(self):
-    return self.__plate_like_objects
+  def plate_like_objects_coordinates(self):
+    return self.__plate_like_objects_coordinates
 
   def __calculate_min_area(self, min_region_area_as_percentage):
-    min_area = float(min_region_area_as_percentage / 100) * self.__labeled_image_size
+    min_area = float(min_region_area_as_percentage / 100) * self.__binary_image_area
     print(f'Min region area: {min_area}')
     return min_area
 
   def __calculate_max_area(self, max_region_area_as_percentage):
-    max_area = float(max_region_area_as_percentage / 100) * self.__labeled_image_size
+    max_area = float(max_region_area_as_percentage / 100) * self.__binary_image_area
     print(f'Max region area: {max_area}')
     return max_area
 
   def __is_region_area_invalid(self, region_area):
     return region_area < self.__min_region_area or region_area > self.__max_region_area
 
-  def find_plate_like_objects(self):
+  def __show_with_rectangles(self):
+    fig, (ax1, ax2) = plt.subplots(1, 2)
+
+    for plate_like_object in self.__plate_like_objects_coordinates:
+      min_row = plate_like_object.get("min_row")
+      min_col = plate_like_object.get("min_col")
+      max_row = plate_like_object.get("max_row")
+      max_col = plate_like_object.get("max_col")
+      
+      region_width = max_col - min_col
+      region_height = max_row - min_row
+
+      rectBorder = patches.Rectangle((min_col, min_row), region_width, region_height, edgecolor="red", linewidth=2, fill=False)
+      ax1.add_patch(rectBorder)
+
+    ax1.imshow(self.__binary_image, cmap="gray")
+    ax2.imshow(self.__labeled_image)
+    plt.show()
+
+  """
+  Returns frame coordinates which fulfills license plate conditions
+  """
+  def find_plate_like_objects_coordinates(self):
 
     for each_region in regionprops(self.__labeled_image):
 
-      # Removing too big/small regions
       if self.__is_region_area_invalid(each_region.area):
         continue
 
@@ -60,15 +79,16 @@ class CanonicalCorrelationAnalyzer():
       region_height = max_row - min_row
 
       if self.__licensePlateValidator.validate_width_and_height(region_width, region_height):
-        self.__plate_like_objects.append(self.__binary_image[min_row:max_row, min_col:max_col])
+        self.__plate_like_objects_coordinates.append(
+          dict(
+            min_row = min_row, 
+            max_row = max_row, 
+            min_col = min_col, 
+            max_col = max_col
+          )
+        )
           
-        # TODO: Move plotting to separate class
-        if 'DISP' in os.environ: 
-          fig, (ax1, ax2) = plt.subplots(1, 2)
-          rectBorder = patches.Rectangle((min_col, min_row), region_width, region_height, edgecolor="red", linewidth=2, fill=False)
-          ax1.add_patch(rectBorder)
+    if 'DISP' in os.environ and self.__plate_like_objects_coordinates: 
+      self.__show_with_rectangles()
 
-          ax1.imshow(self.__binary_image, cmap="gray")
-          ax2.imshow(self.__labeled_image)
-          
-          plt.show()
+    return self.__plate_like_objects_coordinates
