@@ -3,7 +3,7 @@ class CharactersValidator():
   def __init__(
     self, 
     char_height_as_percentage_of_plate_min = 55, 
-    char_height_as_percentage_of_plate_max = 80, 
+    char_height_as_percentage_of_plate_max = 90, 
     char_width_as_percentage_of_plate_min = 5,
     char_width_as_percentage_of_plate_max = 15
     ):

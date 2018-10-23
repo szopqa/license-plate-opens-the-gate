@@ -30,5 +30,5 @@ for plate_like_object_image in images:
   print(plate_like_object_image.shape)
   segmentator.get_characters_from_license_plate(plate_like_object_image)
   ImageDisplay.show_image(plate_like_object_image)
-  ImageDisplay.show_filtered_image(plate_like_object_image)
+  # ImageDisplay.show_filtered_image(plate_like_object_image)
   saver.save(plate_like_object_image)
