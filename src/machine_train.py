@@ -48,7 +48,7 @@ def cross_validation(model, num_of_fold, train_data, train_label):
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
-training_dataset_dir = os.path.join(current_dir, 'train_data')
+training_dataset_dir = os.path.join(current_dir, '../train_data')
 
 image_data, target_data = read_training_data(training_dataset_dir)
 
