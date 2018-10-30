@@ -20,6 +20,7 @@ class CharactersSegmentator ():
     self.__character_height = character_height
 
     self.__characters_found = []
+    self.__coordinates_of_characters_found = []
 
   def __label_license_plate (self, license_plate):
     return measure.label(license_plate, connectivity = 2)
@@ -52,8 +53,6 @@ class CharactersSegmentator ():
 
 
   # TODO: Current solution seems to be way to much complicated. Idea is to fill images with white pixels
-
-
   """
   Model was trained on 20x20 images, so characters with different size
   have to be resized
@@ -119,13 +118,8 @@ class CharactersSegmentator ():
 
 
       if region_height > min_height and region_height < max_height and region_width > min_width and region_width < max_width:
-
-        if region_width == self.__character_width and region_height == self.__character_height:
-          print('appending 1')
-          self.__characters_found.append(license_plate[min_row :max_row, min_col:max_col])
-        else:
-          print('appending 2')
-          self.__characters_found.append(self.__resize_to_match_model(license_plate, min_row, max_row, min_col, max_col))
+        self.__characters_found.append(license_plate[min_row :max_row, min_col:max_col])
+        self.__coordinates_of_characters_found.append((min_row, min_col, max_row, max_col))
       
     if 'DISP' in os.environ and self.__characters_found: 
       self.__show_with_rectangles(license_plate, labelled_plate)

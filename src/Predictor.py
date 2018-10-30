@@ -3,8 +3,9 @@ from sklearn.externals import joblib
 
 class Predictor():
   
-  def __init__(self, model_path = 'models/svc/svc.pkl'):
+  def __init__(self, model_mapper, model_path = 'models/svc/svc.pkl'):
     self.__model = self.__load_model(model_path)
+    self.__model_mapper = model_mapper
     self.__classification_result = []
     self.__license_plate_characters = ''
 
@@ -15,12 +16,10 @@ class Predictor():
 
   def clasify_characters(self, characters):
     for each_character in characters:
-      each_character = each_character.reshape(1, -1);
+      each_character = self.__model_mapper.resize_image_to_match_model(each_character).reshape(1, -1)
       result = self.__model.predict(each_character)
       self.__classification_result.append(result)
     
-    print(f'DEBUG: classification results : {self.__classification_result}')
-
   def get_classified_characters(self):
     for each_predict in self.__classification_result:
       self.__license_plate_characters += each_predict[0]
