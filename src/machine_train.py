@@ -16,8 +16,8 @@ def read_training_data(training_directory):
     image_data = []
     target_data = []
     for each_letter in letters:
-        for each in range(10):
-            image_path = os.path.join(training_directory, each_letter, each_letter + '_' + str(each) + '.jpg')
+        for filename in os.listdir(f'{training_directory}/{each_letter}'):
+            image_path = os.path.join(training_directory, each_letter, filename)
             # read each image of each character
             img_details = imread(image_path, as_gray=True)
             # converts each character image to binary image
