@@ -14,6 +14,8 @@ from ModelMapper import ModelMapper
 from Predictor import Predictor
 
 reader = Reader('../input_images/car2.jpg')
+ImageDisplay.show_image(reader.get_binary())
+
 saver = ImageSaver()
 
 binary_image = reader.get_binary()
