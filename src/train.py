@@ -6,6 +6,12 @@ from sklearn.externals import joblib
 from skimage.io import imread
 from skimage.filters import threshold_otsu
 
+from Reader import Reader
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #  
+#  Script used to learn computer recognizing letters  #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
 letters = [
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D',
             'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T',
@@ -15,18 +21,17 @@ letters = [
 def read_training_data(training_directory):
     image_data = []
     target_data = []
-    for each_letter in letters:
+    for each_letter in os.listdir(f'{training_directory}'):
         for filename in os.listdir(f'{training_directory}/{each_letter}'):
+            
+            print(f'DEBUG: Learning letter {each_letter} from file : {filename}')
+
             image_path = os.path.join(training_directory, each_letter, filename)
-            # read each image of each character
             img_details = imread(image_path, as_gray=True)
+            reader = Reader(image_path)
+
             # converts each character image to binary image
-            binary_image = img_details < threshold_otsu(img_details)
-            # the 2D array of each image is flattened because the machine learning
-            # classifier requires that each sample is a 1D array
-            # therefore the 20*20 image becomes 1*400
-            # in machine learning terms that's 400 features with each pixel
-            # representing a feature
+            binary_image = reader.get_binary_fixed_resize(20, 20)
             flat_bin_image = binary_image.reshape(-1)
             image_data.append(flat_bin_image)
             target_data.append(each_letter)
@@ -40,7 +45,7 @@ def cross_validation(model, num_of_fold, train_data, train_label):
     # it will divide the dataset into 4 and use 1/4 of it for testing
     # and the remaining 3/4 for the training
     accuracy_result = cross_val_score(model, train_data, train_label,
-                                      cv=num_of_fold)
+                                      cv=num_of_fold, n_jobs=-1)
     print("Cross Validation Result for ", str(num_of_fold), " -fold")
 
     print(accuracy_result * 100)
@@ -55,7 +60,7 @@ image_data, target_data = read_training_data(training_dataset_dir)
 # the kernel can be 'linear', 'poly' or 'rbf'
 # the probability was set to True so as to show
 # how sure the model is of it's prediction
-svc_model = SVC(kernel='linear', probability=True)
+svc_model = SVC(kernel='linear', probability=True, verbose=True, gamma=0.0001)
 
 cross_validation(svc_model, 4, image_data, target_data)
 

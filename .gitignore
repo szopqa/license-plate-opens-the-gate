@@ -8,6 +8,13 @@ models
 
 output_images
 
+# new train data 
+
+train_data_characters
+
+# output characters
+characters
+
 # course files
 theory
 experiments

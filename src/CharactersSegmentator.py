@@ -113,9 +113,7 @@ class CharactersSegmentator ():
       if region_width >= region_height:
         continue
 
-
       print(f'DEBUG: Analyzing region\'s width: { region_width }, height { region_height }')
-
 
       if region_height > min_height and region_height < max_height and region_width > min_width and region_width < max_width:
         self.__characters_found.append(license_plate[min_row :max_row, min_col:max_col])
