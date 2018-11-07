@@ -16,8 +16,8 @@ class Predictor():
 
   def clasify_characters(self, characters):
     for each_character in characters:
-      each_character = self.__model_mapper.resize_image_to_match_model(each_character).reshape(1, -1)
-      result = self.__model.predict(each_character)
+      each_character_resized = self.__model_mapper.resize_image_to_match_model(each_character).reshape(1, -1)
+      result = self.__model.predict(each_character_resized)
       self.__classification_result.append(result)
     
   def get_classified_characters(self):

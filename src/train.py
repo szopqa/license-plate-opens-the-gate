@@ -23,13 +23,11 @@ def read_training_data(training_directory):
     target_data = []
     for each_letter in os.listdir(f'{training_directory}'):
         for filename in os.listdir(f'{training_directory}/{each_letter}'):
-            
             print(f'DEBUG: Learning letter {each_letter} from file : {filename}')
 
             image_path = os.path.join(training_directory, each_letter, filename)
             img_details = imread(image_path, as_gray=True)
             reader = Reader(image_path)
-
             # converts each character image to binary image
             binary_image = reader.get_binary_fixed_resize(20, 20)
             flat_bin_image = binary_image.reshape(-1)
@@ -56,11 +54,10 @@ current_dir = os.path.dirname(os.path.realpath(__file__))
 training_dataset_dir = os.path.join(current_dir, '../train_data')
 
 image_data, target_data = read_training_data(training_dataset_dir)
-
 # the kernel can be 'linear', 'poly' or 'rbf'
 # the probability was set to True so as to show
 # how sure the model is of it's prediction
-svc_model = SVC(kernel='linear', probability=True, verbose=True, gamma=0.0001)
+svc_model = SVC(kernel='linear', probability=True, verbose=False)
 
 cross_validation(svc_model, 4, image_data, target_data)
 
