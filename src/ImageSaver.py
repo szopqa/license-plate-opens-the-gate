@@ -36,9 +36,9 @@ class ImageSaver():
   def save_as_train_data(self, image_matrix, width, height):
     self.__savedImagesDir = '../characters'
 
-    image_matrix[image_matrix == 255] = 1
-    image_matrix[image_matrix == 0] = 255
-    image_matrix[image_matrix == 1] = 0
+    # image_matrix[image_matrix == 255] = 1
+    # image_matrix[image_matrix == 0] = 255
+    # image_matrix[image_matrix == 1] = 0
     img = self.__matrix_to_image(image_matrix)
     resized = img.resize((width, height), Image.ANTIALIAS)
     self.__save(resized, self.__set_image_name())

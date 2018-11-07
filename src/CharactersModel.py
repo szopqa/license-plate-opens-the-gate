@@ -14,7 +14,7 @@ class CharactersModel():
 
   """
   assumptions that the width of single character
-  should be between 5% and 15% of the license plate,
+  should be between 2% and 15% of the license plate,
   and height should be between 55% and 80%
   """
   def get_characters_dimensions(self, license_plate):
