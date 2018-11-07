@@ -50,6 +50,15 @@ class Reader():
     nx, ny = gray_car_image.size
     gray_car_image_resized = gray_car_image.resize((int(nx*resize_ratio), int(ny*resize_ratio)), Image.BICUBIC)
     return self.__threshold(np.asarray(gray_car_image_resized))
+  
+  """
+  Returns binary image resized to given size
+  """
+  def get_binary_fixed_resize(self, width, height):
+    gray_car_image = Image.fromarray(self.__car_image_grayscaled)
+    nx, ny = gray_car_image.size
+    gray_car_image_resized = gray_car_image.resize((width, height), Image.BICUBIC)
+    return self.__threshold(np.asarray(gray_car_image_resized))
 
   """
   Returns binary image
