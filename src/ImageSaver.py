@@ -6,7 +6,7 @@ import os
 
 class ImageSaver():
 
-  imagesSaved = 0;
+  imagesSaved = 0
 
   def __init__(self, savedImagesDir='../output_images'): 
     self.__now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
@@ -34,11 +34,11 @@ class ImageSaver():
     self.__save(resized, self.__set_image_name())
 
   def save_as_train_data(self, image_matrix, width, height):
-    print(image_matrix)
+    self.__savedImagesDir = '../characters'
+
     image_matrix[image_matrix == 255] = 1
     image_matrix[image_matrix == 0] = 255
     image_matrix[image_matrix == 1] = 0
-    print(image_matrix.reshape(1, -1))
     img = self.__matrix_to_image(image_matrix)
     resized = img.resize((width, height), Image.ANTIALIAS)
     self.__save(resized, self.__set_image_name())

@@ -1,5 +1,5 @@
 from CharactersSegmentator import CharactersSegmentator
-from CharactersValidator import CharactersValidator
+from CharactersModel import CharactersModel
 from Reader import Reader
 from ImageDisplay import ImageDisplay
 from Predictor import Predictor
@@ -9,7 +9,7 @@ from ModelMapper import ModelMapper
 reader = Reader('../output_images/2018-10-17T19:25:41_1.png')
 # reader = Reader('../output_images/2018-11-03T15:58:28_2.png')
 
-segmentator = CharactersSegmentator(CharactersValidator())
+segmentator = CharactersSegmentator(CharactersModel())
 
 license_plate = reader.get_binary()
 

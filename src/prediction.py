@@ -10,7 +10,7 @@ model = joblib.load(model_dir)
 classification_result = []
 for each_character in segmentation.characters:
     # converts it to a 1D array
-    each_character = each_character.reshape(1, -1);
+    each_character = each_character.reshape(1, -1)
     result = model.predict(each_character)
     classification_result.append(result)
 

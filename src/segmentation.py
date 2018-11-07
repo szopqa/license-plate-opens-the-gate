@@ -14,7 +14,7 @@ labelled_plate = measure.label(license_plate)
 
 fig, (ax1, ax2) = plt.subplots(1, 2)
 ax2.imshow(license_plate, cmap="gray")
-ax1.imshow(greyscale.gray_car_image, cmap="gray");
+ax1.imshow(greyscale.gray_car_image, cmap="gray")
 # assumptions that the width of
 # a license plate should be between 5% and 15% of the license plate,
 # and height should be between 35% and 60%

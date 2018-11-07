@@ -1,10 +1,10 @@
-class CharactersValidator(): 
+class CharactersModel(): 
 
   def __init__(
     self, 
     char_height_as_percentage_of_plate_min = 55, 
     char_height_as_percentage_of_plate_max = 90, 
-    char_width_as_percentage_of_plate_min = 5,
+    char_width_as_percentage_of_plate_min = 2,
     char_width_as_percentage_of_plate_max = 15
     ):
     self.__char_height_as_percentage_of_plate_min = char_height_as_percentage_of_plate_min / 100

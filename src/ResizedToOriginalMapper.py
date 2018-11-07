@@ -16,4 +16,4 @@ class ResizedToOriginalMapper():
 
       self.__plate_like_images_from_original.append(self.__original_binary_image[min_row:max_row, min_col:max_col])
 
-    return self.__plate_like_images_from_original;
+    return self.__plate_like_images_from_original
