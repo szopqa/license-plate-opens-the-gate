@@ -68,7 +68,8 @@ class CanonicalCorrelationAnalyzer():
   """
   def find_plate_like_objects_coordinates(self):
 
-    for each_region in regionprops(self.__labeled_image):
+    found_regions = regionprops(self.__labeled_image)
+    for each_region in found_regions:
 
       if self.__is_region_area_invalid(each_region.area):
         continue
@@ -78,7 +79,7 @@ class CanonicalCorrelationAnalyzer():
       region_width = max_col - min_col
       region_height = max_row - min_row
 
-      if self.__licensePlateValidator.validate_width_and_height(region_width, region_height):
+      if self.__licensePlateValidator.validate_region_width_and_height(region_width, region_height):
         self.__plate_like_objects_coordinates.append(
           dict(
             min_row = min_row, 
