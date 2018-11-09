@@ -12,7 +12,7 @@ class Reader():
   """
   def __init__(self, image_location, img_max_width=600):
     read_image = imread(image_location, as_gray=True)
-
+    self.__original_image = read_image
     self._img_max_width = img_max_width
     self.__car_image_grayscaled = self.__read_and_resize_if_necessary(read_image)
 
