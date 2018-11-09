@@ -8,9 +8,9 @@ from skimage.filters import threshold_otsu
 
 from Reader import Reader
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # #  
-#  Script used to learn computer recognizing letters  #
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # # # # # # #
+#  Script used to train model #
+# # # # # # # # # # # # # # # #
 
 letters = [
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D',
@@ -37,10 +37,7 @@ def read_training_data(training_directory):
     return (np.array(image_data), np.array(target_data))
 
 def cross_validation(model, num_of_fold, train_data, train_label):
-    # this uses the concept of cross validation to measure the accuracy
-    # of a model, the num_of_fold determines the type of validation
-    # e.g if num_of_fold is 4, then we are performing a 4-fold cross validation
-    # it will divide the dataset into 4 and use 1/4 of it for testing
+    # dividing the dataset into 4 and useing 1/4 of it for testing
     # and the remaining 3/4 for the training
     accuracy_result = cross_val_score(model, train_data, train_label,
                                       cv=num_of_fold, n_jobs=-1)
@@ -54,19 +51,15 @@ current_dir = os.path.dirname(os.path.realpath(__file__))
 training_dataset_dir = os.path.join(current_dir, '../train_data')
 
 image_data, target_data = read_training_data(training_dataset_dir)
-# the kernel can be 'linear', 'poly' or 'rbf'
-# the probability was set to True so as to show
-# how sure the model is of it's prediction
-svc_model = SVC(kernel='linear', probability=True, verbose=False)
+
+svc_model = SVC(kernel='linear', probability=True, verbose=True)
 
 cross_validation(svc_model, 4, image_data, target_data)
 
-# let's train the model with all the input data
+# training model
 svc_model.fit(image_data, target_data)
 
-# we will use the joblib module to persist the model
-# into files. This means that the next time we need to
-# predict, we don't need to train the model again
+# saving trained model to file
 save_directory = os.path.join(current_dir, 'models/svc/')
 if not os.path.exists(save_directory):
     os.makedirs(save_directory)

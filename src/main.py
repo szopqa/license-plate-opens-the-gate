@@ -33,7 +33,6 @@ segmentator = CharactersSegmentator(CharactersModel())
 
 predictor = Predictor(model_mapper)
 
-
 for each_plate_like_object_image in valid_plate_like_object_images:
   ImageDisplay.show_image(each_plate_like_object_image)
   
