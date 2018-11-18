@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import datetime
 import os
+import scipy.misc
 
 class ImageSaver():
 
@@ -42,3 +43,6 @@ class ImageSaver():
     img = self.__matrix_to_image(image_matrix)
     resized = img.resize((width, height), Image.ANTIALIAS)
     self.__save(resized, self.__set_image_name())
+
+  def save_single_frame(self, image_frame):
+    scipy.misc.imsave(self.__set_image_name(), image_frame)
