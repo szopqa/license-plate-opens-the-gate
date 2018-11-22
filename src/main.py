@@ -11,7 +11,7 @@ from ResizedToOriginalMapper import ResizedToOriginalMapper
 from CharactersSegmentator import CharactersSegmentator
 from CharactersModel import CharactersModel
 from ModelMapper import ModelMapper
-from Predictor import Predictor
+from Predictor import Predictor 
 
 reader = Reader('../input_images/car2.jpg')
 binary_image = reader.get_binary()
@@ -34,6 +34,7 @@ segmentator = CharactersSegmentator(CharactersModel())
 predictor = Predictor(model_mapper)
 
 for each_plate_like_object_image in valid_plate_like_object_images:
+  # saver.save(each_plate_like_object_image)
   ImageDisplay.show_image(each_plate_like_object_image)
   
   characters_matrix = segmentator.get_characters_from_license_plate(each_plate_like_object_image)
