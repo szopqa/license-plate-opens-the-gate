@@ -7,6 +7,7 @@ models
 #output images
 
 output_images
+out_image_frames
 
 # new train data 
 
