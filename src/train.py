@@ -6,7 +6,7 @@ from sklearn.externals import joblib
 from skimage.io import imread
 from skimage.filters import threshold_otsu
 
-from Reader import Reader
+from plate_recognition_core.Reader import Reader
 
 # # # # # # # # # # # # # # # #
 #  Script used to train model #

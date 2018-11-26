@@ -1,10 +1,10 @@
-from CharactersSegmentator import CharactersSegmentator
-from CharactersModel import CharactersModel
-from Reader import Reader
-from ImageDisplay import ImageDisplay
-from Predictor import Predictor
-from ImageSaver import ImageSaver
-from ModelMapper import ModelMapper
+from plate_recognition_core.CharactersSegmentator import CharactersSegmentator
+from plate_recognition_core.CharactersModel import CharactersModel
+from plate_recognition_core.Reader import Reader
+from plate_recognition_core.ImageDisplay import ImageDisplay
+from plate_recognition_core.Predictor import Predictor
+from plate_recognition_core.ImageSaver import ImageSaver
+from plate_recognition_core.ModelMapper import ModelMapper
 
 reader = Reader('./data_utils/license_plates/DLU64819.png')
 

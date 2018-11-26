@@ -18,7 +18,7 @@ class LicensePlateValidator():
     real_l_p_height = 114, 
     allowed_mistake_on_ratio = 0.1,
     allowed_mistake_on_whites_to_black = 0.1,
-    white_to_black_results_path = './data_utils/results.json'
+    white_to_black_results_path = '../data_utils/results.json'
   ):
     self.__real_l_p_width = real_l_p_width
     self.__real_l_p_height = real_l_p_height

@@ -3,7 +3,7 @@ from sklearn.externals import joblib
 
 class Predictor():
   
-  def __init__(self, model_mapper, model_path = 'models/svc/svc.pkl'):
+  def __init__(self, model_mapper, model_path = '../models/svc/svc.pkl'):
     self.__model = self.__load_model(model_path)
     self.__model_mapper = model_mapper
     self.__classification_result = []

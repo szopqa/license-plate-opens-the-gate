@@ -7,12 +7,12 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib import animation
 
-from Reader import Reader
-from SlidingWindow import SlidingWindow
-from ImageDisplay import ImageDisplay
-from ImageSaver import ImageSaver
-from ModelMapper import ModelMapper
-from Predictor import Predictor
+from plate_recognition_core.Reader import Reader
+from plate_recognition_core.SlidingWindow import SlidingWindow
+from plate_recognition_core.ImageDisplay import ImageDisplay
+from plate_recognition_core.ImageSaver import ImageSaver
+from plate_recognition_core.ModelMapper import ModelMapper
+from plate_recognition_core.Predictor import Predictor
 
 def show_with_rectangle(image, x, y, window_width, window_height):
   ImageDisplay.show_with_rectangle(x, y, window_width, window_height, image)
