@@ -20,6 +20,9 @@ characters
 theory
 experiments
 
+# uploaded images
+uploads
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
