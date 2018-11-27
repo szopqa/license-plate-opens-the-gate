@@ -6,7 +6,7 @@ from plate_recognition_service.PlateRecognitionService import PlateRecognitionSe
 if __name__ == "__main__":
     character_recognition_model_path = f'{os.getcwd()}/models/svc/svc.pkl'
 
-    image_analyzer = ImageAnalyzer(character_recognition_model_path, 0.4)
+    image_analyzer = ImageAnalyzer(character_recognition_model_path, 0.4, reset_between_predictions=True)
     service = PlateRecognitionService(image_analyzer).start(port = 5000)
 
 
