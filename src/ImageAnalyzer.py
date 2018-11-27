@@ -14,12 +14,17 @@ import matplotlib.pyplot as plt
 from skimage.morphology import opening, square, closing
 
 class ImageAnalyzer():
-    def __init__(self, character_recognition_model_path, allowed_mistake_on_license_plate_ratio):
+    def __init__(self, character_recognition_model_path, allowed_mistake_on_license_plate_ratio, reset_between_predictions):
         self.__character_recognition_model_path = character_recognition_model_path
         self.__allowed_mistake_on_license_plate_ratio = allowed_mistake_on_license_plate_ratio
+        self.__reset_between_predictions = reset_between_predictions
         self.__detected_license_plates = []
 
     def analyze_uploaded_image(self, image_path):
+
+        if self.__reset_between_predictions == True:
+            self.__detected_license_plates = []
+            
         reader = Reader(image_path)
         binary_image = reader.get_binary()
         binary_image_resized = reader.get_binary_resized(1)
