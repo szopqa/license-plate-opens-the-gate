@@ -13,7 +13,6 @@ import os
 import matplotlib.pyplot as plt
 from skimage.morphology import opening, square, closing
 
-
 class ImageAnalyzer():
     def __init__(self, character_recognition_model_path, allowed_mistake_on_license_plate_ratio):
         self.__character_recognition_model_path = character_recognition_model_path
