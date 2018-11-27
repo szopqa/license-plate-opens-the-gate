@@ -9,6 +9,7 @@ class Predictor():
     self.__classification_result = []
     self.__license_plate_characters = ''
 
+
   def __load_model(self, model_path):
     current_dir = os.path.dirname(os.path.realpath(__file__))
     model_dir = os.path.join(current_dir, model_path)  

@@ -1,8 +1,8 @@
 # import the necessary packages
 import cv2
 import imutils
-from Reader import Reader
-from ImageDisplay import ImageDisplay
+from plate_recognition_core.Reader import Reader
+from plate_recognition_core.ImageDisplay import ImageDisplay
 
 class ShapeDetector:
 	def __init__(self):

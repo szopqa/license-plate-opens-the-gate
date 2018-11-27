@@ -5,6 +5,8 @@ import matplotlib.patches as patches
 import numpy as np
 from PIL import Image
 
+from plate_recognition_core.ImageSaver import ImageSaver
+
 import os
 
 class CanonicalCorrelationAnalyzer():
@@ -67,7 +69,7 @@ class CanonicalCorrelationAnalyzer():
   Returns frame coordinates which fulfills license plate conditions
   """
   def find_plate_like_objects_coordinates(self):
-
+    ImageSaver('./out').save_single_frame(self.__labeled_image)
     found_regions = regionprops(self.__labeled_image)
     for each_region in found_regions:
 

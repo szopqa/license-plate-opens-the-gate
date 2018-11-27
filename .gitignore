@@ -13,6 +13,9 @@ out_image_frames
 
 train_data_characters
 
+# temporary labeled images saved during service run
+out
+
 # output characters
 characters
 

@@ -3,8 +3,9 @@ import cv2
 import  imutils
 import os
 
-from Reader import Reader
+from plate_recognition_core.Reader import Reader
 
+# images_dir = './out'
 images_dir = './out_image_frames'
 
 for each_frame in os.listdir(images_dir):
@@ -22,15 +23,16 @@ for each_frame in os.listdir(images_dir):
     cnts=sorted(cnts, key = cv2.contourArea, reverse = True)[:10] #sort contours based on their area keeping minimum required area as '30' (anything smaller than this will not be considered)
     NumberPlateCnt = None #we currently have no Number plate contour
 
-    # loop over our contours to find the best possible approximate contour of number plate
     count = 0
     for c in cnts:
-            peri = cv2.arcLength(c, True)
-            approx = cv2.approxPolyDP(c, 0.02 * peri, True)
-            if len(approx) == 4:  # Select the contour with 4 corners
-                NumberPlateCnt = approx #This is our approx Number Plate Contour
-                cv2.drawContours(image, [NumberPlateCnt], -1, (0,255,0), 3)
-                cv2.imshow("Final Image With Number Plate Detected", image)
-                cv2.waitKey(0) #Wait for user input before closing the images displayed
+        peri = cv2.arcLength(c, True)
+        approx = cv2.approxPolyDP(c, 0.02 * peri, True)
+
+        # if len(approx) == 4:  
+
+        NumberPlateCnt = approx 
+        cv2.drawContours(image, [NumberPlateCnt], -1, (0,255,0), 3)
+        cv2.imshow("Final Image With Number Plate Detected", image)
+        cv2.waitKey(0) 
 
 
