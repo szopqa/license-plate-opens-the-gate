@@ -27,6 +27,7 @@ class ImageAnalyzer():
             
         reader = Reader(image_path)
         binary_image = reader.get_binary()
+        # ImageDisplay.show_image(binary_image)
         binary_image_resized = reader.get_binary_resized(1)
 
         license_plate_validator = LicensePlateValidator(
