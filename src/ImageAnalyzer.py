@@ -51,7 +51,7 @@ class ImageAnalyzer():
             predictor.clasify_characters(characters_matrix)
             self.__detected_license_plates.append(predictor.get_classified_characters())
 
+        temp = self.__detected_license_plates
+        self.__detected_license_plates = list(filter(lambda x: len(x) < 9, temp))
+
         return self.__detected_license_plates
-
-
-  
