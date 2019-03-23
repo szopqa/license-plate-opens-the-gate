@@ -23,7 +23,7 @@ def run():
     
     resized = skimage.transform.resize(each_image_frame, (MODEL_HEIGHT, MODEL_WIDTH))
     saver.save_single_frame(resized)
-    # time.sleep(1 * 0.001 * 100)
+    time.sleep(1 * 0.001 * 100)
 
 
 MODEL_WIDTH = 128
