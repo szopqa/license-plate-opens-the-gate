@@ -27,11 +27,11 @@ def run_monitoring_device():
     camera = PiCamera()
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(23, GPIO.IN) 
-    camera.start_preview() # inicjalizacja kamery
+    camera.start_preview() # camera initialization
     sleep(5)    
 
     try:
-        time.sleep(2) # stabilizacja sensora
+        time.sleep(2) # setting up sensor
         while True:
             if GPIO.input(23):
                 print("Motion Detected...")
